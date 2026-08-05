@@ -1,0 +1,15 @@
+# IntelliJ IDE files
+.idea/
+*.iml
+out/
+
+# Visual Studio files
+.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+
+# Operating system files
+.DS_Store
+Thumbs.db
