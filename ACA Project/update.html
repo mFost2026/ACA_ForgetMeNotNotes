@@ -1,0 +1,109 @@
+<style>
+	/* Global Reset: Ensures layout stretches cleanly to the window boundaries */
+	html,
+	body {
+		margin: 0 !important;
+		padding: 0 !important;
+		min-height: 100vh;
+	}
+
+	body {
+		background-image: url(./image/fingerribbon_yellow_2.jpg);
+		background-repeat: no-repeat;
+		background-position: center top;
+		background-size: cover;
+	}
+
+	/* Unified form element scaling for 100% resolution monitor viewing */
+	.responsive-form-control {
+		font-size: 1.15rem !important;
+		height: auto !important;
+		padding: 0.4rem 0.75rem !important;
+	}
+</style>
+<!-- Outer content wrapper utilizing Bootstrap utilities to dynamically center the layout vertically and horizontally -->
+<div class="container-fluid min-height-100 d-flex align-items-center justify-content-center py-5">
+	<!-- Set width to col-xl-4/col-lg-6 to compress card footprint back down to a perfect centered size -->
+	<div class="col-xl-4 col-lg-6 col-md-8 col-sm-11">
+		<div class="card shadow-lg" style="border: 2px solid black;">
+			<!-- Card Header Area: Styled to match the darksalmon color scheme of your original page -->
+			<div class="card-header text-center" style="background-color: yellow; border-bottom: 2px solid black;">
+				<h1 class="font-weight-bold m-0" style="font-size: calc(1.5rem + 0.5vw); color: black;">Update Task</h1>
+				<p class="h6 font-weight-bold text-dark my-2">Here you can change or delete fields for the selected
+					task, or mark it completed.</p>
+				<div class="text-success font-weight-bold h5 m-0" ng-bind="updateStatus"></div>
+			</div>
+			<!-- Card Body Input Elements Area -->
+			<div class="card-body" style="background-color: lightyellow;">
+				<form name="updateForm">
+					<!-- Title Input -->
+					<div class="form-group mb-3">
+						<label for="title" class="font-weight-bold h5">Title</label>
+						<input ng-model="todo.title" required ng-minlength="2" name="title" type="text"
+							class="form-control responsive-form-control" id="title">
+						<span class="text-danger small font-weight-bold d-block mt-1"
+							ng-if="updateForm.title.$touched && !updateForm.title.$valid">
+							Required field - please enter a title of more than 2 characters
+						</span>
+					</div>
+					<!-- Task Type Dropdown Selector -->
+					<div class="form-group mb-3">
+						<label for="listId" class="font-weight-bold h5">Task Type</label>
+						<select ng-options="value for value in ListType" ng-model="todo.listtype" name="listtype"
+							class="form-control responsive-form-control" id="listId">
+						</select>
+					</div>
+					<!-- Start Date Input (Text box with On-Focus Calendar Popup) -->
+					<div class="form-group mb-3">
+						<label for="StartDate" class="font-weight-bold h5">Start Date</label>
+						<input ng-model="todo.startDate" type="text" placeholder="yyyy-mm-dd"
+							class="form-control responsive-form-control" id="StartDate" name="StartDate"
+							onfocus="this.type='date'; setTimeout(() => this.showPicker(), 10);"
+							onblur="if(!this.value) this.type='text';">
+					</div>
+					<!-- Note Text Input -->
+					<div class="form-group mb-3">
+						<label for="note" class="font-weight-bold h5">Note</label>
+						<textarea ng-model="todo.note" name="note" class="form-control responsive-form-control" maxlength="500"
+							id="note" style="height: 100px; resize: vertical; text-align: left;"></textarea>
+					</div>
+					<!-- Completed Status Checkbox -->
+					<div class="form-group form-check mb-3 py-1 d-flex align-items-center">
+						<input ng-model="todo.done" name="done" type="checkbox" class="form-check-input" id="done"
+							style="width: 20px; height: 20px; cursor: pointer;">
+						<label for="done" class="form-check-label font-weight-bold h5 m-0 pl-2"
+							style="cursor: pointer;">Completed Task?</label>
+					</div>
+					<!-- Metadata Information Panel -->
+					<div class="pt-2 border-top" style="font-size: 0.85rem; border-color: #bbb !important;">
+						<div class="d-flex justify-content-between my-1">
+							<span class="font-weight-bold text-muted">Todo ID:</span>
+							<span ng-bind="todo.id" id="id" class="font-weight-bold"></span>
+						</div>
+						<div class="d-flex justify-content-between my-1">
+							<span class="font-weight-bold text-muted">Create Date:</span>
+							<span ng-bind="todo.createDateTime" id="create"></span>
+						</div>
+						<div class="d-flex justify-content-between my-1">
+							<span class="font-weight-bold text-muted">Update Date:</span>
+							<span ng-bind="todo.updateDateTime" id="update"></span>
+						</div>
+					</div>
+				</form>
+			</div>
+			<!-- Action Buttons Footer Area -->
+			<div class="card-footer text-center" style="background-color: lemonchiffon; border-top: 2px solid black;">
+				<button type="button" class="btn btn-sm font-weight-bold mx-1 py-2 px-3 text-dark"
+					style="background-color: green; box-shadow: 3px 3px black; border: 1px solid black;"
+					ng-disabled="updateForm.$invalid || disableUpdate" ng-click="updateTodoById()">Update</button>
+				<button type="button" class="btn btn-sm font-weight-bold mx-1 py-2 px-3 text-black"
+					style="background-color: crimson; box-shadow: 3px 3px black; border: 1px solid black;"
+					ng-click="deleteTodoById()" ng-disabled="disableUpdate">Delete</button>
+				<button type="button" class="btn btn-sm font-weight-bold mx-1 py-2 px-3 text-black"
+					style="background-color: lightyellow; box-shadow: 3px 3px black; border: 1px solid black;"
+					ng-click="goToSearchView()">Cancel</button>
+			</div>
+
+		</div>
+	</div>
+</div>

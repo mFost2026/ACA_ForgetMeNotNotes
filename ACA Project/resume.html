@@ -1,0 +1,175 @@
+<style>
+	/* Global Reset: Instantly prevents outer browser scrollbars from breaking the canvas frame */
+	html,
+	body {
+		margin: 0 !important;
+		padding: 0 !important;
+		min-height: 100vh;
+		max-height: 100vh !important;
+		background-color: turquoise !important;
+		overflow: hidden !important;
+	}
+
+	/* Desktop-only single-window canvas layout rules */
+	@media (min-width: 992px) {
+		.desktop-fixed-window {
+			height: 100vh !important;
+			max-height: 100vh !important;
+			overflow: hidden !important;
+			display: flex;
+			flex-direction: column;
+			padding: 15px !important;
+			/* Uniform framing padding matching app */
+		}
+
+		/* Expanded to 70vh now that the footer image is gone to maximize text panel view */
+		.resume-flex-body {
+			height: 70vh !important;
+			max-height: 70vh !important;
+			display: flex !important;
+			flex-direction: row !important;
+			min-height: 0 !important;
+			width: 100% !important;
+			margin: 0 !important;
+		}
+
+		/* Disables the center text scrollbar entirely so text lines present continuously */
+		.resume-scroll-container {
+			height: 100% !important;
+			max-height: 100% !important;
+			overflow-y: hidden !important;
+			background-color: transparent !important;
+		}
+
+		/* Side panel graphics continue to mirror the height profile of the center text block */
+		.resume-decorative-img {
+			height: 100% !important;
+			width: 100% !important;
+			object-fit: fill !important;
+			border: 10px solid black !important;
+			border-radius: 4px;
+		}
+	}
+
+	/* Clean, professional typography weights to fit data at 100% resolution monitor targets */
+	.contact-info-block h1 {
+		font-size: 1.6rem !important;
+		margin-bottom: 0.15rem;
+	}
+
+	.contact-info-block h2 {
+		font-size: 1.05rem !important;
+		color: #111 !important;
+		margin: 0.1rem 0;
+	}
+
+	.resume-section-header {
+		font-size: 1.3rem !important;
+		color: black !important;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+
+	.job-title {
+		font-size: 1.05rem !important;
+		color: #000 !important;
+		margin-top: 1rem !important;
+		margin-bottom: 0.25rem !important;
+	}
+
+	.resume-text-body p {
+		font-size: 0.95rem !important;
+		line-height: 1.85 !important;
+		color: #111;
+		margin-bottom: 1rem !important;
+	}
+
+	.email-link {
+		color: rgb(7, 8, 87) !important;
+		text-decoration: underline !important;
+		font-weight: bold;
+	}
+
+	/* Mobile fallback scaling adjustments */
+	@media (max-width: 991px) {
+
+		html,
+		body,
+		.desktop-fixed-window {
+			height: auto !important;
+			max-height: none !important;
+			overflow: auto !important;
+		}
+
+		.resume-flex-body {
+			display: block !important;
+		}
+	}
+</style>
+
+<div class="container-fluid px-0 desktop-fixed-window">
+	<!-- Top Row: Centered contact info header section -->
+	<div class="w-100 text-center contact-info-block font-weight-bold mb-3 p-2" style="background-color: transparent;">
+		<h1 class="font-weight-bold" style="color: black;">Marvalee Foster</h1>
+		<h2>84 Cypress Creek Road &bull; Springfield, AR 72157 &bull; 501-242-2669</h2>
+		<h2>Email: <a href="mailto:marvaleefoster2015@gmail.com" class="email-link">marvaleefoster2015@gmail.com</a>
+		</h2>
+	</div>
+	<!-- Main Body Section Wrapper: Side frames perfectly hug the height configuration of the text column block -->
+	<div class="resume-flex-body">
+		<!-- Left Decorative Side Panel -->
+		<div class="col-md-2 d-none d-md-block p-1 h-100">
+			<img class="resume-decorative-img" src="./image/resume_left_side.jpg" alt="Decorative Left Panel">
+		</div>
+		<!-- Center Column: Primary Resume Text Content -->
+		<div class="col-md-8 col-12 px-3 py-1 text-center h-100 resume-scroll-container">
+			<div class="resume-text-body" style="font-style: normal;">
+				<!-- SUMMARY SECTION -->
+				<h2 class="font-weight-bold resume-section-header" style="text-decoration: underline;">Summary</h2>
+				<p class="font-weight-bold mt-1">
+					Quality Assurance veteran with over 26 years of testing experience across various technical
+					environments and business sectors.
+					Transitioning from catching bugs in code to ensure quality to writing quality code.
+				</p>
+				<p class="font-weight-bold my-2" style="font-size: 0.95rem !important;">
+					LinkedIn: <a href="https://linkedin.com" target="_blank" class="font-weight-bold"
+						style="color: rgb(7, 8, 87); text-decoration: underline;">Marvalee Foster</a>
+				</p>
+				<!-- EXPERIENCE SECTION -->
+				<h2 class="font-weight-bold resume-section-header mt-3" style="text-decoration: underline;">Experience
+				</h2>
+				<h3 class="font-weight-bold job-title">Oxford Global Resources</h3>
+				<p class="px-lg-4">
+					Responsible for validating functionality and accuracy of web application for home health care client
+					BrightStar Care INC.
+					Duties included testing functional areas included adding employees/customers, scheduling, billing
+					and patient records.
+					Led efforts to survey all existing test cases to identify duplicated test cases and tag for
+					removal/update.
+				</p>
+				<h3 class="font-weight-bold job-title">Gainwell Technologies / Infinite Computer Solutions</h3>
+				<p class="px-lg-4">
+					Responsible for testing Medicaid related process for TennCare - State of Tennessee. Co-led
+					pre-release reviews of client documentation.
+					Developed a more efficient onboarding process while onboarding 7 new testers. Organized and
+					conducted training sessions for test team
+					and business analysts on new tools, documentation methods and testing procedures.
+				</p>
+				<h3 class="font-weight-bold job-title">First Orion Corporation</h3>
+				<p class="px-lg-4">
+					Responsible for creating the automation program for testing mobile devices.
+					Automated API calls for Android scam caller application to run in CI/CD on Jenkins for daily
+					regression testing.
+				</p>
+				<h3 class="font-weight-bold job-title">ABC Financial</h3>
+				<p class="px-lg-4">
+					Responsible for automation of existing API backend calls into CI/CD for daily regression testing.
+				</p>
+			</div>
+		</div>
+		<!-- Right Decorative Side Panel -->
+		<div class="col-md-2 d-none d-md-block p-1 h-100">
+			<img class="resume-decorative-img" src="./image/resume_right_side.jpg" alt="Decorative Right Panel">
+		</div>
+	</div>
+</div>

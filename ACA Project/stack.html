@@ -1,0 +1,194 @@
+<style>
+	/* Global Reset: Ensures layout stretches cleanly to the window boundaries */
+	html,
+	body {
+		margin: 0 !important;
+		padding: 0 !important;
+		min-height: 100vh;
+		background-color: turquoise !important;
+		overflow-x: hidden;
+	}
+
+	/* Desktop-only viewport layout constraints */
+	@media (min-width: 992px) {
+		.desktop-fixed-window {
+			height: 100vh !important;
+			max-height: 100vh !important;
+			overflow: hidden !important;
+			display: flex;
+			flex-direction: column;
+			padding: 15px !important;
+		}
+
+		.desktop-sync-height {
+			height: 40vh !important;
+			max-height: 40vh !important;
+		}
+
+		/* FIXED: Creates an isolated absolute canvas for the scattered layout */
+		.scatter-canvas {
+			position: relative !important;
+			flex: 1 !important;
+			width: 100% !important;
+			min-height: 0;
+		}
+
+		/* FIXED: Exact absolute positioning rules and expanded scales to match your layout map */
+		.pos-js {
+			position: absolute !important;
+			width: 160px !important;
+			left: 3%;
+			top: 15%;
+		}
+
+		.pos-bootstrap {
+			position: absolute !important;
+			width: 180px !important;
+			left: 20%;
+			top: -15%;
+			/* Lifted high up toward the list items */
+		}
+
+		.pos-api {
+			position: absolute !important;
+			width: 190px !important;
+			left: 38%;
+			top: 5%;
+		}
+
+		.pos-springboot {
+			position: absolute !important;
+			width: 170px !important;
+			left: 55%;
+			top: -10%;
+			/* Lifted up near the Server text baseline */
+		}
+
+		.pos-jdbc {
+			position: absolute !important;
+			width: 185px !important;
+			left: 70%;
+			top: 10%;
+		}
+
+		.pos-postman {
+			position: absolute !important;
+			width: 140px !important;
+			left: 86%;
+			top: -35%;
+			/* Lifted way up into your designated far-right circle area */
+		}
+	}
+
+	/* Typography controls */
+	.stack-title-text {
+		font-size: calc(1.25rem + 0.5vw) !important;
+		color: black !important;
+		font-weight: bold !important;
+		margin: 0 !important;
+	}
+
+	.list-group-custom li {
+		font-size: 1.15rem !important;
+		font-weight: bold !important;
+		color: #111 !important;
+		padding: 4px 0 !important;
+	}
+
+	.tech-logo-scattered {
+		height: auto !important;
+		object-fit: contain;
+	}
+
+	/* Mobile responsive view fallback */
+	@media (max-width: 991px) {
+		.desktop-fixed-window {
+			height: auto !important;
+			max-height: none !important;
+			overflow: auto !important;
+		}
+
+		.scatter-canvas {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		.pos-js,
+		.pos-bootstrap,
+		.pos-api,
+		.pos-springboot,
+		.pos-jdbc,
+		.pos-postman {
+			width: 120px !important;
+			margin: 15px !important;
+			position: static !important;
+		}
+	}
+</style>
+
+<div class="container-fluid px-0 desktop-fixed-window">
+	<!-- Header Banner -->
+	<div class="w-100 py-2 px-3 text-center mb-3">
+		<h1 class="font-weight-bold m-0" style="font-size: calc(1.5rem + 0.8vw); color: black;">Project Development
+			Stacks</h1>
+	</div>
+	<!-- Main Content Panel -->
+	<div class="row no-gutters w-100 m-0 desktop-sync-height p-3" style="overflow-y: auto;">
+		<!-- Client Stack Column -->
+		<div class="col-md-4 col-12 mb-3 mb-md-0 px-3">
+			<div class="p-2 h-100">
+				<h3 class="stack-title-text text-center text-md-left border-bottom pb-2"
+					style="border-color: black !important;">Client Stack</h3>
+				<ul class="pl-4 mt-2 list-group-custom">
+					<li>HTML</li>
+					<li>CSS</li>
+					<li>AngularJS</li>
+					<li>JavaScript</li>
+					<li>Chrome Developer Tools</li>
+					<li>HTTP</li>
+					<li>Bootstrap</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Server Stack Column -->
+		<div class="col-md-4 col-12 mb-3 mb-md-0 px-3">
+			<div class="p-2 h-100">
+				<h3 class="stack-title-text text-center text-md-left border-bottom pb-2"
+					style="border-color: black !important;">Server Stack</h3>
+				<ul class="pl-4 mt-2 list-group-custom">
+					<li>Java</li>
+					<li>RESTful Services</li>
+					<li>Spring Boot</li>
+					<li>MariaDB (MySQL)</li>
+					<li>SQL & DDL</li>
+					<li>JDBC</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Other Tools Column -->
+		<div class="col-md-4 col-12 px-3">
+			<div class="p-2 h-100">
+				<h3 class="stack-title-text text-center text-md-left border-bottom pb-2"
+					style="border-color: black !important;">Other Stacks & Tools</h3>
+				<ul class="pl-4 mt-2 list-group-custom">
+					<li>IntelliJ IDE</li>
+					<li>Apache Maven</li>
+					<li>HeidiSQL</li>
+					<li>Visual Studio Code</li>
+					<li>JSON & XML</li>
+					<li>Postman</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- Absolute coordinate coordinate layer with strict positioning variables -->
+	<div class="scatter-canvas">
+		<img class="tech-logo-scattered pos-js" src="./image/js.png" alt="JavaScript">
+		<img class="tech-logo-scattered pos-bootstrap" src="./image/bs.png" alt="Bootstrap">
+		<img class="tech-logo-scattered rounded-circle pos-api" src="./image/api.png" alt="API">
+		<img class="tech-logo-scattered pos-springboot" src="./image/springboot.png" alt="Spring Boot">
+		<img class="tech-logo-scattered pos-jdbc" src="./image/jdbc.png" alt="JDBC">
+		<img class="tech-logo-scattered rounded-circle pos-postman" src="./image/postman.jfif" alt="Postman">
+	</div>
+</div>

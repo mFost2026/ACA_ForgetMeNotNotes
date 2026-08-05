@@ -1,0 +1,137 @@
+<style>
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 100vh;
+    }
+
+    body {
+        position: relative;
+        z-index: 0;
+    }
+
+    /* Creates a separate background layer to apply hardware-accelerated image filters */
+    body::before {
+        content: "";
+        position: fixed;
+        /* Keeps the background stable if the page scrolls */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(./image/postItNote.png);
+        background-repeat: repeat;
+        /* Balanced 250px tiling density */
+        background-size: 250px auto !important;
+        /* Boosts light levels by 35% and subtly deepens rich colors so they don't look dull */
+        filter: brightness(1.35) contrast(1.05);
+        z-index: -1;
+        /* Keeps the background firmly behind all form elements */
+        pointer-events: none;
+        /* Prevents this layer from blocking clicks or text selections */
+    }
+
+    /* Unified form styling helper to ensure readable text across all devices */
+    .responsive-form-control {
+        font-size: 1.25rem !important;
+        height: auto !important;
+        padding: 0.5rem 0.75rem !important;
+    }
+
+    /* Forces all validation text to turn bright red */
+    .text-danger,
+    .text-danger.small {
+        color: #dc3545 !important;
+    }
+
+    /* Highlights empty required fields in red once touched or submitted */
+    .ng-submitted .ng-invalid,
+    .ng-touched.ng-invalid {
+        border: 2px solid #dc3545 !important;
+        background-color: #fff8f8;
+    }
+</style>
+
+<!-- Single integrated viewport layout wrapper grid -->
+<div class="container-fluid d-flex align-items-center justify-content-center py-5" style="min-height: 100vh;">
+    <!-- Main Parent Grid: Restricts card width footprint globally -->
+    <div class="col-xl-4 col-lg-6 col-md-8 col-sm-11">
+        <div class="card shadow-lg" style="border: 2px solid black;">
+            <!-- Card Header Area -->
+            <div class="card-header text-center" style="background-color: yellow; border-bottom: 2px solid black;">
+                <h1 class="font-weight-bold my-2" style="font-size: calc(1.5rem + 0.5vw);">Add Task</h1>
+                <h2 class="h6 font-weight-bold text-muted my-2">To add a new task: fill in the required fields then
+                    click Submit.</h2>
+                <p class="small font-weight-bold m-0 text-dark" style="font-size: 0.85rem;">To return to the Home page -
+                    click on the Forget Me Not Notes link (top left).</p>
+                <!-- Dynamically toggles text-danger vs text-success based on content -->
+                <div class="font-weight-bold h5 mt-2"
+                    ng-class="{'text-danger': createStatus.includes('Error'), 'text-success': createStatus.includes('successful')}"
+                    ng-bind="createStatus"></div>
+            </div>
+            <!-- Combined Card Body & Form State -->
+            <!-- Added ng-submit and novalidate to handle submission natively via Angular -->
+            <form name="createForm" ng-submit="createTodo()" novalidate>
+                <!-- Card Body Input Elements Area -->
+                <div class="card-body" style="background-color: honeydew;">
+                    <!-- Title Field -->
+                    <div class="form-group">
+                        <label for="title" class="font-weight-bold h5">Title</label>
+                        <input ng-model="todo.title" required ng-minlength="2" name="title" type="text"
+                            class="form-control responsive-form-control" id="title">
+                        <span class="text-danger small font-weight-bold d-block mt-1"
+                            ng-if="(createForm.$submitted || createForm.title.$touched) && !createForm.title.$valid">
+                            Required and must be at least 2 characters
+                        </span>
+                    </div>
+                    <!-- Task Type Selector Dropdown Field -->
+                    <div class="form-group">
+                        <label for="listId" class="font-weight-bold h5">Task Type</label>
+                        <select ng-options="value for value in ListType" ng-model="todo.listtype" name="listtype"
+                            required class="form-control responsive-form-control" id="listId">
+                            <option value="">-- Select Type --</option>
+                        </select>
+                        <span class="text-danger small font-weight-bold d-block mt-1"
+                            ng-if="(createForm.$submitted || createForm.listtype.$touched) && !createForm.listtype.$valid">
+                            Required field selection
+                        </span>
+                    </div>
+                    <!-- Start Date Field -->
+                    <div class="form-group">
+                        <label for="startDate" class="font-weight-bold h5">Start Date</label>
+                        <div class="pt-1">
+                            <input ng-model="todo.startDate" min="{{ today | date:'yyyy-MM-dd' }}" required type="date"
+                                class="form-control responsive-form-control" id="startDate" name="startDate">
+                        </div>
+                        <span class="text-danger small font-weight-bold d-block mt-1"
+                            ng-if="(createForm.$submitted || createForm.startDate.$touched) && !createForm.startDate.$valid">
+                            Required and must not be before today's date
+                        </span>
+                    </div>
+                    <!-- Note Text Area Field -->
+                    <div class="form-group">
+                        <label for="note" class="font-weight-bold h5">Note</label>
+                        <textarea ng-model="todo.note" name="note" class="form-control responsive-form-control"
+                            id="note" maxlength="500"
+                            style="height: 120px; text-align: left; resize: vertical;"></textarea>
+                    </div>
+                </div>
+                <!-- Action Buttons Footer Area (Inside Form) -->
+                <div class="card-footer text-center" style="background-color: #f7f7f7; border-top: 2px solid black;">
+                    <!-- Changed type to submit to cleanly trigger .ng-submitted states across all missing fields -->
+                    <button type="submit" class="btn btn-sm font-weight-bold mx-2 py-2 px-3"
+                        style="color: black; background-color: yellow; box-shadow: 3px 3px black; border: 1px solid black;"
+                        ng-disabled="disableCreate">
+                        Submit
+                    </button>
+                    <button type="button" class="btn btn-sm font-weight-bold mx-2 py-2 px-3"
+                        style="color: black; background-color: yellow; box-shadow: 3px 3px black; border: 1px solid black;"
+                        ng-click="clear()">
+                        Clear
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

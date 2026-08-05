@@ -1,0 +1,331 @@
+<style>
+    /* Global layout edge-to-edge with no clipping margins */
+    html,
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        min-height: 100vh;
+        max-height: 100vh !important;
+        background-color: #000000 !important;
+        width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    /* Desktop-only view encapsulation */
+    @media (min-width: 992px) {
+        .desktop-fixed-window {
+            height: 100vh !important;
+            max-height: 100vh !important;
+            overflow: hidden !important;
+            display: flex;
+            flex-direction: column;
+            border: 24px solid #000000;
+            /* Main thick absolute outer frame border */
+            box-sizing: border-box;
+            background-color: #000000 !important;
+        }
+
+        /* Yellow workspace canvas container height tracking limits */
+        .dashboard-scroll-body {
+            height: 60vh !important;
+            max-height: 60vh !important;
+            flex: 1 !important;
+            overflow-y: auto !important;
+            background-color: yellow !important;
+            width: 100% !important;
+            margin: 0 !important;
+            padding: 0 15px !important;
+        }
+
+        /* Expanded footer height and set position to relative to create a coordinate canvas layer */
+        .desktop-footer-panel {
+            height: 110px !important;
+            max-height: 110px !important;
+            position: relative !important;
+            margin-bottom: 2px !important;
+            width: 100% !important;
+            background-color: #000000 !important;
+        }
+
+        /* Central container to cleanly lock the main control buttons in the dead center of the footer */
+        .footer-center-buttons {
+            position: absolute !important;
+            left: 50% !important;
+            top: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            z-index: 10 !important;
+        }
+
+        /* Custom positioning classes(bees) with image */
+        .bee-canvas-img {
+            position: absolute !important;
+            height: auto !important;
+            object-fit: contain !important;
+            z-index: 5 !important;
+        }
+
+        /* Left Side Buzzing Swarm Coordinates */
+        .bee-pos-1 {
+            width: 70px !important;
+            left: 1%;
+            top: 45%;
+            transform: rotate(15deg);
+        }
+
+        .bee-pos-2 {
+            width: 55px !important;
+            left: 8%;
+            top: 65%;
+            transform: rotate(-10deg) scaleX(-1);
+        }
+
+        .bee-pos-3 {
+            width: 65px !important;
+            left: 16%;
+            top: 20%;
+            transform: rotate(25deg);
+        }
+
+        .bee-pos-4 {
+            width: 50px !important;
+            left: 21%;
+            top: 60%;
+            transform: rotate(-20deg);
+        }
+
+        .bee-pos-5 {
+            width: 60px !important;
+            left: 28%;
+            top: 40%;
+            transform: rotate(10deg) scaleX(-1);
+        }
+
+        /* Bottom-Center Buzzing Swarm Coordinates */
+        .bee-pos-6 {
+            width: 65px !important;
+            left: 45%;
+            top: 70%;
+            transform: rotate(-5deg);
+        }
+
+        .bee-pos-7 {
+            width: 55px !important;
+            left: 54%;
+            top: 75%;
+            transform: rotate(15deg) scaleX(-1);
+        }
+
+        /* Right Side Buzzing Swarm Coordinates */
+        .bee-pos-8 {
+            width: 60px !important;
+            left: 63%;
+            top: 40%;
+            transform: rotate(-15deg);
+        }
+
+        .bee-pos-9 {
+            width: 50px !important;
+            left: 70%;
+            top: 65%;
+            transform: rotate(20deg) scaleX(-1);
+        }
+
+        .bee-pos-10 {
+            width: 75px !important;
+            left: 78%;
+            top: 50%;
+            transform: rotate(-30deg);
+        }
+
+        .bee-pos-11 {
+            width: 55px !important;
+            left: 85%;
+            top: 70%;
+            transform: rotate(10deg);
+        }
+
+        .bee-pos-12 {
+            width: 65px !important;
+            left: 91%;
+            top: 25%;
+            transform: rotate(-20deg) scaleX(-1);
+        }
+    }
+
+    /* Compact typography scaling */
+    .app-main-title {
+        font-size: calc(1.5rem + 1vw) !important;
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    .gothic-scroll-title {
+        font-size: 2.3rem !important;
+        line-height: 1.1;
+        color: black;
+        margin: 0;
+        width: 100% !important;
+        text-align: center !important;
+        white-space: nowrap !important;
+    }
+
+    .dashboard-sub-heading {
+        font-size: 1.4rem !important;
+        line-height: 1.15;
+        margin-bottom: 4px;
+    }
+
+    .dashboard-text-p {
+        font-size: 1.05rem !important;
+        color: #222;
+        line-height: 1.25;
+        margin: 0;
+    }
+
+    /* Ribbon and bouquet images layout frames */
+    .ribbon-img-frame {
+        max-width: 320px;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .flowers-right-img {
+        max-width: 440px;
+        width: 100%;
+        height: auto;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+    }
+
+    /* Mobile responsive view fallback switcher overrides */
+    @media (max-width: 991px) {
+
+        html,
+        body,
+        .desktop-fixed-window {
+            height: auto !important;
+            max-height: none !important;
+            overflow: auto !important;
+        }
+
+        .desktop-fixed-window {
+            border: 10px solid #000;
+            padding: 0 !important;
+        }
+
+        .dashboard-scroll-body {
+            padding: 15px !important;
+        }
+
+        .flowers-right-img,
+        .ribbon-img-frame {
+            max-width: 260px;
+            margin: 15px auto;
+        }
+
+        .gothic-scroll-title {
+            white-space: normal !important;
+            font-size: 1.8rem !important;
+        }
+
+        .desktop-footer-panel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 15px !important;
+            height: auto !important;
+            max-height: none !important;
+        }
+
+        .footer-center-buttons {
+            position: static !important;
+            transform: none !important;
+            margin-bottom: 10px;
+        }
+
+        .bee-canvas-img {
+            display: none !important;
+        }
+
+        /* Hides coordinates on narrow phone screens */
+    }
+</style>
+
+<div class="container-fluid px-0 desktop-fixed-window">
+    <!-- HEADER JUMBOTRON -->
+    <div class="w-100 py-3 px-3 text-center text-warning"
+        style="border-bottom: 3px solid black; color: yellow !important; margin: 0 !important; background-color: black;">
+        <h1 class="font-weight-bold app-main-title">
+            Welcome To The 'Forget Me Not Notes' Task Management Application
+        </h1>
+    </div>
+    <!-- MAIN VIEWPORT GRID PANEL AREA -->
+    <div class="dashboard-scroll-body">
+        <div class="row no-gutters align-items-center h-100 w-100 m-0" style="background-color: yellow !important;">
+            <!-- SECTION 1 (Left Area) -->
+            <div class="col-lg-3 col-12 d-flex justify-content-center align-items-center py-3">
+                <div class="text-center">
+                    <img class="ribbon-img-frame" src="./image/smallersizeyellowribbon31.jpg"
+                        alt="Yellow Ribbon Symbol">
+                </div>
+            </div>
+            <!-- SECTION 2 (Center Area) -->
+            <div class="col-lg-6 col-12 d-flex flex-column align-items-center justify-content-center py-3 px-2">
+                <div class="text-center px-4 py-3 mb-4"
+                    style="background-color: yellow; border: 6px double black; box-shadow: 0 8px 16px rgba(0,0,0,0.12); border-radius: 6px; width: 95% !important; max-width: 620px !important;">
+                    <div style="font-size: 20px; line-height: 1; color: black; margin-bottom: 4px;">༺❀❖ ❦ ⚙ ❦ ❖❀༻</div>
+                    <h1 class="font-weight-bold gothic-scroll-title">'Forget Me Not Notes' for Today</h1>
+                    <div style="font-size: 20px; line-height: 1; color: black; margin-top: 6px;">༺❀❖ ❦ ⚙ ❦ ❖❀༻</div>
+                </div>
+                <div class="text-center text-dark mb-4" style="max-width: 440px;">
+                    <h2 class="font-weight-bold dashboard-sub-heading" style="font-style: italic; color: black;">Want to
+                        add a New Task?</h2>
+                    <p class="font-weight-bold dashboard-text-p" style="color: #222;">Click on the Add Task button
+                        below.</p>
+                </div>
+                <div class="text-center text-dark" style="max-width: 440px;">
+                    <h2 class="font-weight-bold dashboard-sub-heading" style="font-style: italic; color: black;">Need to
+                        update your task?</h2>
+                    <p class="font-weight-bold dashboard-text-p" style="color: #222;">
+                        Click on the Search Task button below. When the Search page opens - Click on any task and make
+                        any changes you want.
+                    </p>
+                    <h2 class="text-primary font-weight-bold m-0 mt-3"
+                        style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3); font-size: 1.25rem !important;">
+                        Select a button below to continue.
+                    </h2>
+                </div>
+            </div>
+            <!-- SECTION 3 (Right Area) -->
+            <div class="col-lg-3 col-12 d-flex align-items-center justify-content-center py-3">
+                <img class="flowers-right-img" src="./image/forgetmeNotFlowers.jpg" alt="Forget Me Not Flowers Bouquet">
+            </div>
+        </div>
+    </div>
+    <!-- FOOTER CANVAS BLOCK: Houses all 12 scattered bee coordinates -->
+    <div class="w-100 bg-dark desktop-footer-panel" style="border-top: 3px solid black; margin: 0 !important;">
+        <!-- Absolute Bee Layout Mapping Layer -->
+        <img class="img-fluid bee-canvas-img bee-pos-1" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-2" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-3" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-4" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-5" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-6" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-7" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-8" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-9" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-10" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-11" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <img class="img-fluid bee-canvas-img bee-pos-12" src="./image/bee2.jfif" alt="Scattered Honeybee">
+        <!-- Centered Button Controls Menu Box Group -->
+        <div class="d-flex justify-content-center align-items-center footer-center-buttons" style="gap: 25px;">
+            <button type="button" class="btn btn-sm font-weight-bold px-4 py-2"
+                style="color: black; box-shadow: 2px 2px 4px black; background-color: yellow;"
+                ng-click="goToSearchView()">Search Tasks</button>
+            <button type="button" class="btn btn-sm font-weight-bold px-4 py-2"
+                style="color: black; box-shadow: 2px 2px 4px black; background-color: yellow; border: 1px solid #000000;"
+                ng-click="goToAddView()">Add New Task</button>
+        </div>
+    </div>
+</div>
